@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:marvel_api/src/services/HeroService.dart';
 
 class CharacterProfileForm extends StatefulWidget {
   @override
@@ -20,8 +21,10 @@ class _CharacterProfileFormState extends State<CharacterProfileForm> {
             hintText: 'Hero name',
             suffixIcon: IconButton(
               icon: Icon(Icons.search),
-              onPressed: () {
-                _formKey.currentState.validate();
+              onPressed: () async {
+                if (_formKey.currentState.validate()) {
+                  await HeroService().show('Iron Man');
+                }
               },
             ),
           ),
