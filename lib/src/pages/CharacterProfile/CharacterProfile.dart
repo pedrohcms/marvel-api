@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:marvel_api/src/CharacterProfileForm.dart';
+import 'package:marvel_api/src/pages/CharacterProfileForm/CharacterProfileForm.dart';
 
 class CharacterProfile extends StatefulWidget {
   @override
