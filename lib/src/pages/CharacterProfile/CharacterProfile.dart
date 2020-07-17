@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:marvel_api/src/pages/CharacterProfile/CharacterProfileProvider.dart';
 import 'package:marvel_api/src/pages/CharacterProfileForm/CharacterProfileForm.dart';
+import 'package:provider/provider.dart';
 
 class CharacterProfile extends StatefulWidget {
   @override
@@ -18,16 +20,19 @@ class _CharacterProfileState extends State<CharacterProfile> {
             children: <Widget>[
               // Search Hero
               CharacterProfileForm(),
-              Column(
-                children: <Widget>[
-                  // Hero Thumbnail
-                  Container(),
-                  // Hero Info
-                  Row(
-                    children: <Widget>[],
-                  ),
-                ],
-              )
+              Consumer<CharacterProfileProvider>(
+                  builder: (context, characterProfileProvider, widget) {
+                return Column(
+                  children: <Widget>[
+                    // Hero Thumbnail
+                    Container(),
+                    // Hero Info
+                    Row(
+                      children: <Widget>[],
+                    ),
+                  ],
+                );
+              }),
             ],
           ),
         ),

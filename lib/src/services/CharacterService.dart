@@ -14,16 +14,12 @@ class CharacterService extends ApiService {
 
     query['name'] = characterName;
 
+    Response response = await Dio().get(url, queryParameters: query);
+
     Character character;
 
-    try {
-      Response response = await Dio().get(url, queryParameters: query);
+    character = Character.fromJson(jsonDecode(response.toString()));
 
-      character = Character.fromJson(jsonDecode(response.toString()));
-    } catch (e) {
-      print(e);
-    } finally {
-      return character;
-    }
+    return character;
   }
 }

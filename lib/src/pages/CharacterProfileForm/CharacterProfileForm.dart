@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:marvel_api/src/services/CharacterService.dart';
-import 'package:marvel_api/src/models/Character.dart';
+import 'package:marvel_api/src/pages/CharacterProfileForm/CharacterProfileFormProvider.dart';
+import 'package:provider/provider.dart';
 
 class CharacterProfileForm extends StatefulWidget {
   @override
@@ -14,6 +14,9 @@ class _CharacterProfileFormState extends State<CharacterProfileForm> {
 
   @override
   Widget build(BuildContext context) {
+    CharacterProfileFormProvider characterProfileFormProvider =
+        Provider.of<CharacterProfileFormProvider>(context);
+
     return Expanded(
       child: Form(
         key: _formKey,
@@ -27,8 +30,8 @@ class _CharacterProfileFormState extends State<CharacterProfileForm> {
               icon: Icon(Icons.search),
               onPressed: () async {
                 if (_formKey.currentState.validate()) {
-                  Character character = await CharacterService()
-                      .show(characterNameController.text);
+                  characterProfileFormProvider
+                      .queryCharacter(characterNameController.text);
                 }
               },
             ),
