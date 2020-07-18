@@ -1,10 +1,13 @@
 import 'dart:convert';
 import 'package:crypto/crypto.dart';
+import 'package:marvel_api/src/utils/Api.dart';
+
+// TODO: Create a Api.dart file with a map called auth and put both your pulic key and private key there
 
 class ApiService {
   String get baseUrl => 'https://gateway.marvel.com/v1/public';
-  String get publicKey => '81d6a976834e5a1c7c175ccaab687243';
-  String get privateKey => '37acfec2598fbf433f4d093daa93c7c8974f27a1';
+  String get publicKey => auth['publicKey'];
+  String get privateKey => auth['privateKey'];
 
   String makeHash() {
     String apiKey = DateTime.now().millisecondsSinceEpoch.toString() +

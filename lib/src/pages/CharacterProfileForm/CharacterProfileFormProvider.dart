@@ -9,6 +9,7 @@ class CharacterProfileFormProvider extends ChangeNotifier {
       CharacterProfileProvider();
 
   queryCharacter(String characterName) async {
+    print('Passei');
     Character character = await characterService.show(characterName);
     characterProfileProvider.changeCharacter(character);
   }

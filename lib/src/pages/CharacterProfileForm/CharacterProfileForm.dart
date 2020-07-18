@@ -37,7 +37,13 @@ class _CharacterProfileFormState extends State<CharacterProfileForm> {
             cursorColor: Colors.white,
             autocorrect: false,
             maxLines: 1,
-            textInputAction: TextInputAction.go,
+            onFieldSubmitted: (value) {
+              if (_formKey.currentState.validate()) {
+                characterProfileFormProvider
+                    .queryCharacter(characterNameController.text);
+              }
+            },
+            textInputAction: TextInputAction.search,
             style: TextStyle(fontSize: 20, color: Colors.white),
             decoration: InputDecoration(
               enabledBorder: characterNameInputBorderDecoration,
