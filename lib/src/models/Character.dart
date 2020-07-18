@@ -2,7 +2,7 @@ class Character {
   int id;
   String name;
   String description;
-  String thumbnailUrl;
+  String thumbnailPath;
   int comics;
   String comicsUrl;
   int series;
@@ -12,7 +12,11 @@ class Character {
   int events;
   String eventsUrl;
 
-  Character();
+  Character(
+      {this.id,
+      this.name,
+      this.description = 'No description avaiable',
+      this.thumbnailPath});
 
   Character.fromJson(Map<String, dynamic> json) {
     this.id = json['data']['results'][0]['id'];
@@ -21,7 +25,7 @@ class Character {
 
     this.description = json['data']['results'][0]['description'];
 
-    this.thumbnailUrl = json['data']['results'][0]['thumbnail']['path'] +
+    this.thumbnailPath = json['data']['results'][0]['thumbnail']['path'] +
         'portrait_fantastic' +
         json['data']['results'][0]['thumbnail']['extension'];
 

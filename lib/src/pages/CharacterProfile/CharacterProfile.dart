@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:marvel_api/src/models/Character.dart';
 import 'package:marvel_api/src/pages/CharacterProfile/CharacterProfileProvider.dart';
-import 'package:marvel_api/src/pages/CharacterProfileForm/CharacterProfileForm.dart';
+import 'package:marvel_api/src/components/CharacterProfileForm/CharacterProfileForm.dart';
 import 'package:provider/provider.dart';
+import 'package:marvel_api/src/components/ImageResolver/ImageResolver.dart';
 
 class CharacterProfile extends StatefulWidget {
   @override
@@ -33,21 +34,29 @@ class _CharacterProfileState extends State<CharacterProfile> {
                     builder: (context, characterProfileProvider, widget) {
                   return StreamBuilder<Character>(
                       stream: characterProfileProvider.outputCharacter,
-                      initialData: Character(),
+                      initialData: Character(
+                          name: 'Search your hero first', thumbnailPath: ''),
                       builder: (context, snapshot) {
-                        if (snapshot.hasData) {
+                        if (!snapshot.hasData) {
                           return Container();
                         }
 
                         return Column(
                           children: <Widget>[
                             // Hero Thumbnail
+
                             Container(
-                              child: Image.network(snapshot.data.thumbnailUrl),
+                              child: ImageResolver(
+                                  image: snapshot.data.thumbnailPath),
                             ),
                             // Hero Info
                             Row(
-                              children: <Widget>[],
+                              children: <Widget>[
+                                Text(snapshot.data.name),
+                                Text(snapshot.data.description.isNotEmpty
+                                    ? snapshot.data.description
+                                    : 'No description avaible'),
+                              ],
                             ),
                           ],
                         );
