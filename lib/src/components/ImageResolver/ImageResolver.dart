@@ -8,9 +8,19 @@ class ImageResolver extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (image.contains('http') || image.contains('https')) {
-      return Image.network(image);
+      return ClipOval(
+        child: Image.network(
+          image,
+          width: 150.0,
+        ),
+      );
     } else {
-      return Image.asset(image);
+      return ClipOval(
+        child: Image.asset(
+          image,
+          width: 150.0,
+        ),
+      );
     }
   }
 }

@@ -14,9 +14,17 @@ class Character {
 
   Character(
       {this.id,
-      this.name,
-      this.description = 'No description avaiable',
-      this.thumbnailPath});
+      this.name = 'Search your hero first',
+      this.description = 'No description avaible',
+      this.thumbnailPath = 'assets/images/marvel1.jpeg',
+      this.comics = 0,
+      this.comicsUrl = '',
+      this.series = 0,
+      this.seriesUrl = '',
+      this.stories = 0,
+      this.storiesUrl = '',
+      this.events = 0,
+      this.eventsUrl = ''});
 
   Character.fromJson(Map<String, dynamic> json) {
     this.id = json['data']['results'][0]['id'];

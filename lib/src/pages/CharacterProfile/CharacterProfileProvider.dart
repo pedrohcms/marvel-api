@@ -11,6 +11,7 @@ class CharacterProfileProvider extends ChangeNotifier {
   Stream<Character> get outputCharacter => _characterStreamController.stream;
 
   changeCharacter(Character character) {
+    print(character.name);
     inputCharacter.add(character);
     notifyListeners();
   }

@@ -4,7 +4,7 @@ import 'package:marvel_api/src/pages/CharacterProfile/CharacterProfileProvider.d
 import 'package:marvel_api/src/components/CharacterProfileForm/CharacterProfileFormProvider.dart';
 import 'package:provider/provider.dart';
 
-class MarvelApi extends StatelessWidget {
+class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
