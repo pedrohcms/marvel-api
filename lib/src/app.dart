@@ -17,6 +17,7 @@ class MarvelApi extends StatelessWidget {
         ),
       ],
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         home: CharacterProfile(),
       ),
     );

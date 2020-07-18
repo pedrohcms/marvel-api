@@ -12,6 +12,8 @@ class Character {
   int events;
   String eventsUrl;
 
+  Character();
+
   Character.fromJson(Map<String, dynamic> json) {
     this.id = json['data']['results'][0]['id'];
 
