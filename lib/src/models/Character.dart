@@ -33,9 +33,8 @@ class Character {
 
     this.description = json['data']['results'][0]['description'];
 
-    this.thumbnailPath = json['data']['results'][0]['thumbnail']['path'] +
-        'portrait_fantastic' +
-        json['data']['results'][0]['thumbnail']['extension'];
+    this.thumbnailPath =
+        '${json['data']['results'][0]['thumbnail']['path']}/standard_xlarge.${json['data']['results'][0]['thumbnail']['extension']}';
 
     this.comics = json['data']['results'][0]['comics']['available'];
 

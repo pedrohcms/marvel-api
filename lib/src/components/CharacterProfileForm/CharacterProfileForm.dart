@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:marvel_api/src/components/CharacterProfileForm/CharacterProfileFormProvider.dart';
+import 'package:marvel_api/src/models/Character.dart';
+import 'package:marvel_api/src/pages/CharacterProfile/CharacterProfileProvider.dart';
 import 'package:provider/provider.dart';
 
 class CharacterProfileForm extends StatefulWidget {
@@ -14,18 +16,22 @@ class _CharacterProfileFormState extends State<CharacterProfileForm> {
 
   final OutlineInputBorder characterNameInputBorderDecoration =
       OutlineInputBorder(
-          borderRadius: BorderRadius.all(
-            Radius.circular(10.0),
-          ),
-          borderSide: BorderSide(
-            color: Colors.white,
-            style: BorderStyle.solid,
-          ));
+    borderRadius: BorderRadius.all(
+      Radius.circular(10.0),
+    ),
+    borderSide: BorderSide(
+      color: Colors.white,
+      style: BorderStyle.solid,
+    ),
+  );
 
   @override
   Widget build(BuildContext context) {
     CharacterProfileFormProvider characterProfileFormProvider =
         Provider.of<CharacterProfileFormProvider>(context);
+
+    CharacterProfileProvider characterProfileProvider =
+        Provider.of<CharacterProfileProvider>(context);
 
     return Padding(
       padding: EdgeInsets.only(
@@ -38,10 +44,12 @@ class _CharacterProfileFormState extends State<CharacterProfileForm> {
           cursorColor: Colors.white,
           autocorrect: false,
           maxLines: 1,
-          onFieldSubmitted: (value) {
+          onFieldSubmitted: (value) async {
             if (_formKey.currentState.validate()) {
-              characterProfileFormProvider
+              Character character = await characterProfileFormProvider
                   .queryCharacter(characterNameController.text);
+
+              characterProfileProvider.changeCharacter(character);
             }
           },
           textInputAction: TextInputAction.search,
@@ -49,10 +57,16 @@ class _CharacterProfileFormState extends State<CharacterProfileForm> {
           decoration: InputDecoration(
             enabledBorder: characterNameInputBorderDecoration,
             focusedBorder: characterNameInputBorderDecoration,
+            errorBorder: characterNameInputBorderDecoration,
             focusedErrorBorder: characterNameInputBorderDecoration,
-            errorStyle: TextStyle(color: Colors.white, fontSize: 14.0),
+            errorStyle: TextStyle(
+              color: Colors.white,
+              fontSize: 14.0,
+            ),
             hintText: 'Character name',
-            hintStyle: TextStyle(color: Colors.white),
+            hintStyle: TextStyle(
+              color: Colors.grey[300],
+            ),
             suffixIcon: IconButton(
               icon: Icon(
                 Icons.search,
@@ -60,8 +74,10 @@ class _CharacterProfileFormState extends State<CharacterProfileForm> {
               ),
               onPressed: () async {
                 if (_formKey.currentState.validate()) {
-                  characterProfileFormProvider
+                  Character character = await characterProfileFormProvider
                       .queryCharacter(characterNameController.text);
+
+                  characterProfileProvider.changeCharacter(character);
                 }
               },
             ),
